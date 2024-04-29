@@ -50,15 +50,12 @@ def veiwBalance():
   cursor = connection.cursor()
   sql= ("SELECT supplier_balance FROM user_bank_account WHERE supplier_userName = %s")
   
-  givenUsername = username_entry.get() #this gets the users username 
-  value = (givenUsername,) #made this a tuple
+  givenUsername = username_entry.get()
+  value = (givenUsername,)
   cursor.execute(sql,value)
   result = cursor.fetchone()
-  for r in result: #iterates through result and if balance = 0 then it'll print balance is 0 else your balance is 800
-    if r == 0:
-      message2 = messagebox.showerror("","balance is "+ 0)
-    else:
-      message2 = messagebox.showerror("","your balance is "+ str(r))
+  for r in result:
+    message2 = messagebox.showerror("","your balance is "+ str(r) +" dollars")
   
   
   connection.close()
@@ -85,7 +82,7 @@ def remove_user_account():
   #this deletes user based on their username and password they entered 
   sql = ("DELETE FROM user_bank_account WHERE supplier_userName = %s")
   
-  givenUsername = username_entry.get() #gets users username 
+  givenUsername = username_entry.get()
   
   value = (givenUsername,) # made value into a tuple because i got an error and it said it had to be a tuple 
   
@@ -108,6 +105,8 @@ def remove_user_account():
 #this is the menu which shows the user options 
 #for example viewing account balance, deleting account and adding money 
 def menu():
+ 
+  
   bgImage = PhotoImage(file='/Users/parisdmonkey/Downloads/1000_F_305876177_4EzB8UJafxNruTRjfLgc57mb07Qn1cNv.png')
   bgLabel = Label(root,image=bgImage)
   bgLabel.grid(row=1,column=1)
@@ -126,8 +125,8 @@ def menu():
 #if the password and username is corretc it'll continue 
 def check_login():
   #establishes an connection to my database
-  username = username_entry.get() #gets users username
-  password = pw_entry.get() #gets users password
+  username = username_entry.get()
+  password = pw_entry.get()
   connection = mysql.connector.connect(
   database = db,
   user="root",
@@ -259,6 +258,11 @@ def login_page(): #login page
   option.grid(row=19,column=1)
 
 login_page()
+
+
+
+
+
 
 
 root.mainloop()
