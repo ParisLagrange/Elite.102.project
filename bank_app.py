@@ -42,6 +42,7 @@ start.grid(row=7,column=1)
 
 #this function lets the user view their account balance; tells them how much money they have in their account 
 def veiwBalance():
+  #this establishes a connection to my sql database 
   connection = mysql.connector.connect(
   database = db,
   user="root",
@@ -117,12 +118,12 @@ def menu():
   b_deleteacc = Button(root,text="Delete your account",padx=35,command = remove_user_account)
   #money image 
 
-  b_accbalance.place(x=33,y=270)
-  b_addmoney.place(x=40,y=340)
-  b_deleteacc.place(x=60,y=400)
+  b_accbalance.place(x=33,y=270) #prints 
+  b_addmoney.place(x=40,y=340)#prints
+  b_deleteacc.place(x=60,y=400)#prints
 
 #check login basically checks whether the username or password is right/ in database 
-#if the password and username is corretc it'll continue 
+#if the password and username is correct it'll continue 
 def check_login():
   #establishes an connection to my database
   username = username_entry.get()
@@ -137,7 +138,7 @@ def check_login():
   #selects eveyrthing from table user_banl_account where username and pw are %s (aka the value)
   sql= ("SELECT * FROM user_bank_account WHERE supplier_userName LIKE %s AND supplier_pw LIKE %s")
   
-  value = (username,password)
+  value = (username,password) #are used for values %s 
   
   cursor.execute(sql,value) 
   
@@ -157,7 +158,7 @@ create_userName = Label(root,text="Create a username: ")
 
 
 def createacc():
-  
+  #destroys login page and shows the create account page
   l_username.after(0, l_username.destroy())
   l_password.after(0, l_password.destroy())
   enter_button.after(0, enter_button.destroy())
